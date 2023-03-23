@@ -2,9 +2,11 @@
 # Source this file by running:
 # 	$ . <machine>-<image>-build.sh
 
-arg0=$0
-test -n "$BASH" && arg0=$BASH_SOURCE[0]
+arg0=$1
 filename="${arg0##*/}"
+echo "[INFO] first arg = $1"
+echo "[INFO] filename = $filename"
+
 
 WORKSPACE=$(/bin/readlink -f $(dirname '${0}'))
 echo "[INFO] Build location = $WORKSPACE"
