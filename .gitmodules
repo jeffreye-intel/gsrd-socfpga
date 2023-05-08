@@ -17,5 +17,5 @@
 [submodule "meta-virtualization"]
 	path = meta-virtualization
 	url = https://git.yoctoproject.org/meta-virtualization
-	branch = mickledore
+	branch = langdale
 
