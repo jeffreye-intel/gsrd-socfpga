@@ -19,29 +19,20 @@ echo -e "\n[INFO] Selected ingredient versions for this build"
 # Set Machine variant
 #------------------------------------------------------------------------------------------#
 target=${filename%-*-*}
-if [ -n "${target}" -a "${target}" != "${filename}" ]; then
-	MACHINE=${target}
-fi
-if [ -z "${MACHINE}" ]; then
-	echo "MACHINE must be set before sourcing this script"
-	return
-fi
+MACHINE=agilex5
 echo "MACHINE              = $MACHINE"
 export $MACHINE
 #------------------------------------------------------------------------------------------#
 # Set IMAGE variant
 #------------------------------------------------------------------------------------------#
-image=$(cut -d- -f2 <<< "$filename")
-if [ -n "${image}" -a "${image}" != "${filename}" ]; then
-	IMAGE=${image}
-fi
+IMAGE=gsrd
 echo "VARIANT              = $IMAGE"
 export $IMAGE
 
 #------------------------------------------------------------------------------------------#
 # Set Linux Version
 #------------------------------------------------------------------------------------------#
-export LINUX_VER=6.1
+export LINUX_VER=5.18
 echo "LINUX_VERSION        = $LINUX_VER"
 LINUX_SOCFPGA_BRANCH=socfpga_agilex5-23.1_RC
 echo "LINUX_SOCFPGA_BRANCH = $LINUX_SOCFPGA_BRANCH"
