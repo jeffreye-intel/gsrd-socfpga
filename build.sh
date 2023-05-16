@@ -154,7 +154,7 @@ build_setup() {
 		echo 'PREFERRED_PROVIDER_virtual/kernel = "linux-socfpga"' >> conf/site.conf
 		echo "PREFERRED_VERSION_linux-socfpga = \"`cut -d. -f1-2 <<< "$LINUX_VER"`%\"" >> conf/site.conf
 		echo "KBRANCH = \"$LINUX_SOCFPGA_BRANCH\"" >> conf/site.conf
-		echo "KERNEL_REPO = git://github.com/intel-innersource/applications.fpga.soc.linux-socfpga-dev.git" >> conf/site.conf
+		echo 'KERNEL_REPO = "git://github.com/intel-innersource/applications.fpga.soc.linux-socfpga-dev.git"' >> conf/site.conf
 		# U-boot
 		echo 'PREFERRED_PROVIDER_virtual/bootloader = "u-boot-socfpga"' >> conf/site.conf
 		echo "UBOOT_CONFIG:${MACHINE} = \"$UB_CONFIG\"" >> conf/site.conf
