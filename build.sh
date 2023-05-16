@@ -17,33 +17,23 @@ fi
 echo -e "\n[INFO] Selected ingredient versions for this build"
 #------------------------------------------------------------------------------------------#
 # Set Machine variant
-#------------------------------------------------------------------------------------------#
-target=${filename%-*-*}
-if [ -n "${target}" -a "${target}" != "${filename}" ]; then
-	MACHINE=${target}
-fi
-if [ -z "${MACHINE}" ]; then
-	echo "MACHINE must be set before sourcing this script"
-	return
-fi
+#---------------------------------------------------------n
+MACHINE=agilex5
 echo "MACHINE              = $MACHINE"
 export $MACHINE
 #------------------------------------------------------------------------------------------#
 # Set IMAGE variant
 #------------------------------------------------------------------------------------------#
-image=$(cut -d- -f2 <<< "$filename")
-if [ -n "${image}" -a "${image}" != "${filename}" ]; then
-	IMAGE=${image}
-fi
+IMAGE=gsrd
 echo "VARIANT              = $IMAGE"
 export $IMAGE
 
 #------------------------------------------------------------------------------------------#
 # Set Linux Version
 #------------------------------------------------------------------------------------------#
-export LINUX_VER=6.1
+export LINUX_VER=5.16
 echo "LINUX_VERSION        = $LINUX_VER"
-LINUX_SOCFPGA_BRANCH=socfpga_agilex5-23.1_RC
+LINUX_SOCFPGA_BRANCH=sm-main
 echo "LINUX_SOCFPGA_BRANCH = $LINUX_SOCFPGA_BRANCH"
 
 #------------------------------------------------------------------------------------------#
@@ -164,6 +154,7 @@ build_setup() {
 		echo 'PREFERRED_PROVIDER_virtual/kernel = "linux-socfpga"' >> conf/site.conf
 		echo "PREFERRED_VERSION_linux-socfpga = \"`cut -d. -f1-2 <<< "$LINUX_VER"`%\"" >> conf/site.conf
 		echo "KBRANCH = \"$LINUX_SOCFPGA_BRANCH\"" >> conf/site.conf
+		echo "KERNEL_REPO = git://github.com/intel-innersource/applications.fpga.soc.linux-socfpga-dev.git" >> conf/site.conf
 		# U-boot
 		echo 'PREFERRED_PROVIDER_virtual/bootloader = "u-boot-socfpga"' >> conf/site.conf
 		echo "UBOOT_CONFIG:${MACHINE} = \"$UB_CONFIG\"" >> conf/site.conf
@@ -176,7 +167,7 @@ build_setup() {
 		echo 'KERNEL_MODULE_PROBECONF = "intel_fcs cfg80211"' >> conf/site.conf
 		echo 'module_conf_intel_fcs = "blacklist intel_fcs"' >> conf/site.conf
 		echo 'module_conf_cfg80211 = "blacklist cfg80211"' >> conf/site.conf
-		echo 'DISTRO_FEATURES:append = " virtualization"' >> conf/site.conf
+		echo 'DISTRO_FEATURES:append = " systemd virtualization"' >> conf/site.conf
 		echo 'ENABLE_UART = "1"' >> conf/site.conf
 		echo 'IMAGE_INSTALL:append = " docker-ce"' >> conf/site.conf
 		# Archive source file
