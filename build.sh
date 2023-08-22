@@ -113,7 +113,7 @@ build_setup() {
 		echo -e "\n[INFO] Create build workspace"
 		mkdir -p $WORKSPACE/$MACHINE-$IMAGE-rootfs
 	fi
-	
+
 	if [ ! -d $WORKSPACE/$MACHINE-$IMAGE-images ]; then
 		echo -e "\n[INFO] Create image staging area"
 		mkdir -p $WORKSPACE/$MACHINE-$IMAGE-images
@@ -131,7 +131,7 @@ build_setup() {
 # Initialize Yocto build environment setup
 #------------------------------------------------------------------------------------------#
 	pushd $WORKSPACE > /dev/null
-		
+
 		# Setup Poky build environment
 		pushd meta-intel-fpga-refdes/recipes-bsp/ghrd > /dev/null
 			mkdir -p ./files
@@ -146,6 +146,8 @@ build_setup() {
 		bitbake-layers add-layer ../meta-openembedded/meta-oe
 		bitbake-layers add-layer ../meta-openembedded/meta-python
 		bitbake-layers add-layer ../meta-openembedded/meta-networking
+		bitbake-layers add-layer ../meta-openembedded/meta-filesystems
+		bitbake-layers add-layer ../meta-virtualization
 
 		# Show layers for checking purposes
 		echo -e "\n"
@@ -212,7 +214,7 @@ bitbake_image() {
 			bitbake xvfb-console-image 2>&1
 		fi
 	popd > /dev/null
-	
+
 	echo -e "\n[INFO] Proceed with: package"
 	echo -e "\n"
 }
