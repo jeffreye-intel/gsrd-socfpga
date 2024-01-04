@@ -182,7 +182,7 @@ build_setup() {
 		echo 'module_conf_cfg80211 = "blacklist cfg80211"' >> conf/site.conf
 		echo 'DISTRO_FEATURES:append = " virtualization"' >> conf/site.conf
 		echo 'ENABLE_UART = "1"' >> conf/site.conf
-		echo 'IMAGE_INSTALL:append = " docker-ce"' >> conf/site.conf
+		echo 'IMAGE_INSTALL:append = " docker"' >> conf/site.conf
 		# Archive source file
 		echo 'INHERIT += "archiver"' >> conf/site.conf
 		echo 'ARCHIVER_MODE[src] = "original"' >> conf/site.conf
